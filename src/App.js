@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Home from './pages/home.js';
+import Contact from './pages/contact.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [currentPage, setCurrentPage] = useState('home');
+
+    const renderPage = () => {
+        if (currentPage === 'home') {
+            return <Home />;
+        } else if (currentPage === 'contact') {
+            return <Contact />;
+        }
+    };
+
+    return (
+        <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container-fluid">
+                    <span className="navbar-brand" onClick={() => setCurrentPage('home')}>Blog</span>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <span className="nav-link" onClick={() => setCurrentPage('home')}>Home</span>
+                            </li>
+                            <li className="nav-item">
+                                <span className="nav-link" onClick={() => setCurrentPage('contact')}>Contact</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {renderPage()}
+        </div>
+    );
 }
 
 export default App;
